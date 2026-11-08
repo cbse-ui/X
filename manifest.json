@@ -1,0 +1,10 @@
+{
+  "name": "CBSE Class 10 2026-27",
+  "short_name": "CBSE 2026-27",
+  "description": "CBSE Class 10 Board Exam 2026-27 Study App",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#080b14",
+  "theme_color": "#080b14",
+  "orientation": "any"
+}

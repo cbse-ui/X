@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#080b14">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PYQs | CBSE X</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header>
+    <a class="logo" href="index.html">CB<span>X</span></a>
+    <button id="menu">☰</button>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a class="active" href="pyqs.html">PYQs</a>
+        <a href="timetable.html">Time Table</a>
+        <a href="syllabus.html">Syllabus</a>
+        <a href="pomodoro.html">Pomodoro</a>
+        <a href="resources.html">Resources</a>
+        <a href="planner.html">Planner</a>
+        <a href="updates.html">Updates</a>
+    </nav>
+</header>
+
+<main class="page">
+
+    <section class="section">
+
+        <small>PRACTICE LIBRARY</small>
+        <h1>Previous Year Question Papers</h1>
+        <p class="lead">CBSE Class X • 2026–27</p>
+
+        <div id="subjects" class="grid">
+
+            <div class="card subject-card">
+    <a href="?subject=mathematics">
+        <h3>Mathematics</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+            <div class="card subject-card">
+    <a href="?subject=science">
+        <h3>Science</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+            <div class="card subject-card">
+    <a href="?subject=english">
+        <h3>English</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+           <div class="card subject-card">
+    <a href="?subject=social-science">
+        <h3>Social Science</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+           <div class="card subject-card">
+    <a href="?subject=malayalam">
+        <h3>Malayalam</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+            <div class="card subject-card">
+    <a href="?subject=hindi">
+        <h3>Hindi</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+           <div class="card subject-card">
+    <a href="?subject=information-technology">
+        <h3>Information Technology</h3>
+        <p>Question papers and sample papers</p>
+        <span>Open Folder →</span>
+    </a>
+</div>
+
+        </div>
+
+        <div id="folder" style="display:none">
+
+            <a href="pyqs.html">← All Subjects</a>
+
+            <h1 id="folderTitle">Subject</h1>
+            <p class="lead">Available question papers</p>
+
+            <div class="grid" id="papers"></div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer>CBSE X • 2026–27</footer>
+
+<script src="app.js"></script>
+
+<script>
+const subjectData = {
+    mathematics: {
+        name: "Mathematics",
+        papers: [
+            {
+                title: "2026 Sample Question Paper",
+                file: "maths-2026.pdf"
+            }
+        ]
+    },
+
+    science: {
+        name: "Science",
+        papers: [
+            {
+                title: "2026 Question Paper",
+                file: "science-2026.pdf"
+            }
+        ]
+    },
+
+    english: {
+        name: "English",
+        papers: [
+            {
+                title: "2026 Question Paper",
+                file: "english-2026.pdf"
+            }
+        ]
+    },
+
+    "social-science": {
+        name: "Social Science",
+        papers: []
+    },
+
+    malayalam: {
+        name: "Malayalam",
+        papers: []
+    },
+
+    hindi: {
+        name: "Hindi",
+        papers: []
+    },
+
+    "information-technology": {
+        name: "Information Technology",
+        papers: []
+    }
+};
+
+const params = new URLSearchParams(window.location.search);
+const selectedSubject = params.get("subject");
+
+if (selectedSubject && subjectData[selectedSubject]) {
+
+    document.getElementById("subjects").style.display = "none";
+    document.getElementById("folder").style.display = "block";
+
+    const subject = subjectData[selectedSubject];
+
+    document.getElementById("folderTitle").textContent =
+        subject.name + " PYQs";
+
+    const papersContainer = document.getElementById("papers");
+
+    if (subject.papers.length === 0) {
+
+        papersContainer.innerHTML = `
+            <div class="card">
+                <h3>No papers uploaded yet</h3>
+                <p>Question papers for this subject will appear here.</p>
+            </div>
+        `;
+
+    } else {
+
+        subject.papers.forEach(paper => {
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const heading = document.createElement("h3");
+            heading.textContent = paper.title;
+
+            const link = document.createElement("a");
+            link.href = "files/pyqs/" + selectedSubject + "/" + paper.file;
+            link.target = "_blank";
+            link.rel = "noopener";
+            link.textContent = "View PDF →";
+
+            card.appendChild(heading);
+            card.appendChild(link);
+
+            papersContainer.appendChild(card);
+        });
+    }
+}
+</script>
+
+</body>
+</html>
